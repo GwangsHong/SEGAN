@@ -115,5 +115,9 @@ if __name__ == '__main__':
         # save the model parameters for each epoch
         g_path = os.path.join('epochs', 'generator-{}.pkl'.format(epoch + 1))
         d_path = os.path.join('epochs', 'discriminator-{}.pkl'.format(epoch + 1))
+
+        if torch.cuda.is_available():
+            torch.save(generator.module.state_dict(), g_path)
+            torch.save(discriminator.module.state_dict(), d_path)
         torch.save(generator.state_dict(), g_path)
         torch.save(discriminator.state_dict(), d_path)
