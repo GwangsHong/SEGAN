@@ -3,12 +3,11 @@ import os
 
 import torch
 import torch.nn as nn
-from scipy.io import wavfile
+import librosa
 from torch import optim
 from torch.autograd import Variable
 from torch.utils.data import DataLoader
 from tqdm import tqdm
-
 from data_preprocess import sample_rate
 from model import Generator, Discriminator
 from utils import AudioDataset, emphasis
@@ -110,7 +109,7 @@ if __name__ == '__main__':
                 generated_sample = fake_speech[idx]
                 file_name = os.path.join('results',
                                          '{}_e{}.wav'.format(test_file_names[idx].replace('.npy', ''), epoch + 1))
-                wavfile.write(file_name, sample_rate, generated_sample.T)
+                librosa.output.write_wav(file_name, generated_sample.T.astype(np.float32), sample_rate)
 
         # save the model parameters for each epoch
         g_path = os.path.join('epochs', 'generator-{}.pkl'.format(epoch + 1))
