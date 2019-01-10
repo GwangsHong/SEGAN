@@ -4,7 +4,7 @@ import os
 import numpy as np
 import torch
 import torch.nn as nn
-from scipy.io import wavfile
+import librosa
 from torch.autograd import Variable
 from tqdm import tqdm
 
@@ -42,4 +42,4 @@ if __name__ == '__main__':
     enhanced_speech = np.array(enhanced_speech).reshape(1, -1)
     file_name = os.path.join(os.path.dirname(FILE_NAME),
                              'enhanced_{}.wav'.format(os.path.basename(FILE_NAME).split('.')[0]))
-    wavfile.write(file_name, sample_rate, enhanced_speech.T)
+    librosa.output.write_wav(file_name, enhanced_speech.T.astype(np.float32), sample_rate)
