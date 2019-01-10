@@ -37,7 +37,12 @@ optional arguments:
 --num_epochs             train epochs number [default value is 86]
 ```
 The test results are on `results`.
-
+### Train model using Multi-GPUs
+```
+python main.py ----batch_size 128 --num_epochs 300
+or 
+CUDA_VISIBLE_DEVICES=0,1,2,3 python main.py ----batch_size 128 --num_epochs 300
+```
 ### Test Audio
 ```
 python test_audio.py ----file_name p232_160.wav --epoch_name generator-80.pkl
