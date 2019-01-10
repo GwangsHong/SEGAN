@@ -38,6 +38,9 @@ if __name__ == '__main__':
         discriminator.cuda()
         generator.cuda()
         ref_batch = ref_batch.cuda()
+        gpu_ids = [i for i in range(torch.cuda.device_count())]
+        generator = nn.DataParallel(generator, device_ids=gpu_ids)
+        discriminator = nn.DataParallel(discriminator, device_ids=gpu_ids)
     ref_batch = Variable(ref_batch)
     print("# generator parameters:", sum(param.numel() for param in generator.parameters()))
     print("# discriminator parameters:", sum(param.numel() for param in discriminator.parameters()))
