@@ -94,7 +94,7 @@ if __name__ == '__main__':
 
             train_bar.set_description(
                 'Epoch {}: d_clean_loss {:.4f}, d_noisy_loss {:.4f}, g_loss {:.4f}, g_conditional_loss {:.4f}'
-                    .format(epoch + 1, clean_loss.data[0], noisy_loss.data[0], g_loss.data[0], g_cond_loss.data[0]))
+                    .format(epoch + 1, clean_loss.item(), noisy_loss.item(), g_loss.item(), g_cond_loss.item()))
 
         # TEST model
         test_bar = tqdm(test_data_loader, desc='Test model and save generated audios')
